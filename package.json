@@ -1,0 +1,20 @@
+{
+  "name": "eddy",
+  "version": "0.0.1",
+  "description": "ed",
+  "main": "index.js",
+  "browser": "src/index.js",
+  "dependencies": {
+    "animate.css": "^3.2.5"
+  },
+  "devDependencies": {
+    "browserify": "10.2.4"
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:stbaer/animate.css-js.git"
+  },
+  "author": "'Steffen Baer <stbaer.pub@gmail.com>"
+}
