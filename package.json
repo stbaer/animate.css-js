@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "ed",
   "main": "index.js",
-  "browser": "src/index.js",
   "dependencies": {
     "animate.css": "^3.2.5"
   },
@@ -11,6 +10,7 @@
     "browserify": "10.2.4"
   },
   "scripts": {
+    "bundle": "browserify index.js --standalone animateCss > animateCss.bundle.js"
   },
   "repository": {
     "type": "git",
