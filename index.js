@@ -34,7 +34,7 @@ var setAnimateCssClasses = function(el, animationName, doAdd){
  * @property {number} [opts.duration]
  * @param {function[]} [opts.callbacks=[]]
  */
-var animateCss = function (el, opts) {
+var animate = function (el, opts) {
 
     opts.callbacks = opts.callbacks || [];
 
@@ -87,7 +87,7 @@ var show = function (el, opts) {
     opts.animationName = opts.animationName || 'slideInDown';
     opts.duration = opts.duration || 350;
 
-    animateCss(el, opts);
+    animate(el, opts);
 };
 
 /**
@@ -119,7 +119,7 @@ var hide = function (el, opts) {
     opts.callbacks.push( function () {
         el.classList.add('hidden');
     });
-    animateCss(el, opts);
+    animate(el, opts);
 };
 
 /**
@@ -128,7 +128,7 @@ var hide = function (el, opts) {
  * @type {{animateCSS: Function, show: Function, hide: Function}}
  */
 var animations = {
-    animateCSS: animateCss,
+    animate: animate,
     // show and hide convenience functions
     show: show,
     hide: hide
