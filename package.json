@@ -1,7 +1,7 @@
 {
-  "name": "eddy",
+  "name": "animate-css.js",
   "version": "0.0.1",
-  "description": "ed",
+  "description": "animate.css javascript helper",
   "main": "index.js",
   "dependencies": {
     "animate.css": "^3.2.5"
@@ -16,5 +16,5 @@
     "type": "git",
     "url": "git@bitbucket.org:stbaer/animate.css-js.git"
   },
-  "author": "'Steffen Baer <stbaer.pub@gmail.com>"
+  "author": "'Steffen Bär"
 }
