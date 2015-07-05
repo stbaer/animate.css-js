@@ -1,20 +1,28 @@
 {
   "name": "animate.css-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "animate.css javascript helper",
+  "author": "'Steffen Bär",
+  "license": "MIT",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "animateCss.bundle.js"
+  ],
   "dependencies": {
     "animate.css": "^3.2.5"
   },
-  "devDependencies": {
-    "browserify": "10.2.4"
-  },
+  "devDependencies": {},
   "scripts": {
     "bundle": "browserify index.js --standalone animateCss > animateCss.bundle.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@bitbucket.org:stbaer/animate.css-js.git"
-  },
-  "author": "'Steffen Bär"
+  "repository": "stbaer/animate.css-js",
+  "keywords": [
+    "animate",
+    "animate.css",
+    "browserify"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  }
 }
