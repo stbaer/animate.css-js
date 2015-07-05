@@ -50,7 +50,7 @@ var element = document.querySelector('.some-element');
 ### Example
 
 ```js
-animate.css.animate( element, {
+animateCss.animate( element, {
     animationName: 'zoomIn', 
     duration: 500,
     callbacks: [
