@@ -1,13 +1,16 @@
-# animate.css-js
-javascript helper for animate.css without dependencies for modern browsers
+# animate.css-js 
+
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+
+> Javascript helper for animate.css
 
 ## How to use
 
+[![NPM](https://nodei.co/npm/animate.css-js.png?downloads=true)](https://nodei.co/npm/animate.css-js/)
+
 ### browserify
 
-- npm i stbaer/animate.css-js --save-dev
-- add the animate.css styles
-
+add the animate.css styles
 
 ```js
 var animateCss = require('animate.css-js');
@@ -28,6 +31,36 @@ var element = document.querySelector('.some-element');
 
 ### API
 
-- show(element, options)
-- hide(element, options)
-- animate(element, options)
+- `animate(element, animationName [, options])`
+    - options:
+        - animationName {string} - one of the animate.css animation names
+        - duration {number} - the animation duration in ms
+        - callbacks {function[]}
+- `show(element[, options])`
+     - options:
+        - animationName {string} - one of the animate.css animation names, defaults to 'slideInDown'
+        - duration {number} - the animation duration in ms, defaults to 350
+        - callbacks {function[]}
+- `hide(element[, options])`
+    - options:
+        - animationName {string} - one of the animate.css animation names, defaults to 'slideOutUp'
+        - duration {number} - the animation duration in ms, defaults to 350
+        - callbacks {function[]}
+
+### Example
+
+```js
+animate.css.animate( element, {
+    animationName: 'zoomIn', 
+    duration: 500,
+    callbacks: [
+        function(){ 
+            // zoomIn animation complete 
+        }
+    ]
+});
+```
+
+## License
+
+MIT
