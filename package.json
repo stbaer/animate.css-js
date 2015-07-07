@@ -1,6 +1,6 @@
 {
   "name": "animate.css-js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "animate.css javascript helper",
   "author": "'Steffen Bär",
   "license": "MIT",
@@ -12,9 +12,13 @@
   "dependencies": {
     "animate.css": "^3.2.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "jshint": "^2.8.0"
+  },
   "scripts": {
-    "bundle": "browserify index.js --standalone animateCss > animateCss.bundle.js"
+    "bundle": "browserify index.js --standalone animateCss > animateCss.bundle.js",
+    "jshint": "./node_modules/.bin/jshint ./jshintrc"
   },
   "repository": "stbaer/animate.css-js",
   "keywords": [

@@ -1,4 +1,4 @@
-# animate.css-js 
+# animate.css-js
 
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
@@ -31,7 +31,7 @@ var element = document.querySelector('.some-element');
 
 ### API
 
-- `animate(element, animationName [, options])`
+- `animate(element, [, options])`
     - options:
         - animationName {string} - one of the animate.css animation names
         - duration {number} - the animation duration in ms
@@ -51,14 +51,20 @@ var element = document.querySelector('.some-element');
 
 ```js
 animateCss.animate( element, {
-    animationName: 'zoomIn', 
+    animationName: 'zoomIn',
     duration: 500,
     callbacks: [
-        function(){ 
-            // zoomIn animation complete 
+        function(){
+            // zoomIn animation complete
         }
     ]
 });
+```
+
+## build
+
+```sh
+npm run build
 ```
 
 ## License
