@@ -13,7 +13,7 @@
     "animate.css": "^3.2.5"
   },
   "devDependencies": {
-    "browserify": "^10.2.4",
+    "browserify": "^10.2.6",
     "jshint": "^2.8.0"
   },
   "scripts": {
