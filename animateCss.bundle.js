@@ -6,7 +6,7 @@
  * @param {Element} el
  * @param {number} [duration] in ms
  */
-var setAnimationDuration = function(el, duration){
+var setAnimationDuration = function(el, duration) {
     el.style['-webkit-animation-duration'] = duration ? duration + 'ms' : '';
     el.style['animation-duration'] = duration ? duration + 'ms' : '';
 };
@@ -19,7 +19,7 @@ var setAnimationDuration = function(el, duration){
  * @param {String} animationName
  * @param {Boolean} [doAdd=true] - set to false to remove the classes
  */
-var setAnimateCssClasses = function(el, animationName, doAdd){
+var setAnimateCssClasses = function(el, animationName, doAdd) {
 
     var addOrRemove = doAdd !== false ? 'add' : 'remove';
 
@@ -35,7 +35,7 @@ var setAnimateCssClasses = function(el, animationName, doAdd){
  * @property {number} [opts.duration]
  * @param {function[]} [opts.callbacks=[]]
  */
-var animateCss = function (el, opts) {
+var animate = function(el, opts) {
 
     opts.callbacks = opts.callbacks || [];
 
@@ -48,13 +48,13 @@ var animateCss = function (el, opts) {
 
     setAnimateCssClasses(el, className);
 
-    var animEnd = function () {
+    function animEnd() {
 
         //remove the animate.css classes
         setAnimateCssClasses(el, className, false);
 
         //remove event listeners
-        animEndEventNames.forEach(function(evName){
+        animEndEventNames.forEach(function(evName) {
             el.removeEventListener(evName, animEnd);
         });
 
@@ -63,12 +63,12 @@ var animateCss = function (el, opts) {
             setAnimationDuration(el);
         }
         // call the callbacks
-        opts.callbacks.forEach(function(cb){
+        opts.callbacks.forEach(function(cb) {
             cb();
         });
-    };
+    }
 
-    animEndEventNames.forEach(function(evName){
+    animEndEventNames.forEach(function(evName) {
         el.addEventListener(evName, animEnd);
     });
 };
@@ -81,14 +81,14 @@ var animateCss = function (el, opts) {
  * @property {number} [opts.duration=300]
  * @param {function[]} [opts.callbacks]
  */
-var show = function (el, opts) {
+var show = function(el, opts) {
     el.classList.remove('hidden');
     opts = opts || {};
 
     opts.animationName = opts.animationName || 'slideInDown';
     opts.duration = opts.duration || 350;
 
-    animateCss(el, opts);
+    animate(el, opts);
 };
 
 /**
@@ -99,7 +99,7 @@ var show = function (el, opts) {
  * @property {number} [opts.duration=300]
  * @param {function[]} [opts.callbacks]
  */
-var hide = function (el, opts) {
+var hide = function(el, opts) {
 
     opts = opts || {};
 
@@ -108,19 +108,19 @@ var hide = function (el, opts) {
     opts.callbacks = opts.callbacks || [];
 
     //if the element is already hidden
-    if(el.classList.contains('hidden')){
+    if (el.classList.contains('hidden')) {
         //call the callbacks directly
-        opts.callbacks.forEach(function(cb){
+        opts.callbacks.forEach(function(cb) {
             cb();
         });
         //and get out
         return;
     }
 
-    opts.callbacks.push( function () {
+    opts.callbacks.push(function() {
         el.classList.add('hidden');
     });
-    animateCss(el, opts);
+    animate(el, opts);
 };
 
 /**
@@ -129,12 +129,13 @@ var hide = function (el, opts) {
  * @type {{animateCSS: Function, show: Function, hide: Function}}
  */
 var animations = {
-    animateCSS: animateCss,
+    animate: animate,
     // show and hide convenience functions
     show: show,
     hide: hide
 };
 
 module.exports = animations;
+
 },{}]},{},[1])(1)
 });
