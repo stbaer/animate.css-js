@@ -26,6 +26,25 @@ var setAnimateCssClasses = function(el, animationName, doAdd) {
     el.classList[addOrRemove](animationName);
 };
 
+//https://jonsuh.com/blog/detect-the-end-of-css-animations-and-transitions-with-javascript/
+var whichAnimationEvent = function() {
+    var t,
+        el = document.createElement('fakeelement');
+
+    var animations = {
+        'animation': 'animationend',
+        'OAnimation': 'oAnimationEnd',
+        'MozAnimation': 'animationend',
+        'WebkitAnimation': 'webkitAnimationEnd'
+    };
+
+    for (t in animations) {
+        if (el.style[t] !== undefined) {
+            return animations[t];
+        }
+    }
+};
+
 /**
  *
  * @param {Element} el
@@ -39,23 +58,18 @@ var animate = function(el, opts) {
     opts.callbacks = opts.callbacks || [];
 
     var className = opts.animationName;
-    var animEndEventNames = ["webkitAnimationEnd", "animationend", "oanimationend", "mozAnimationEnd", "MSAnimationEnd"];
+    var animationEventName = whichAnimationEvent();
 
     if (opts.duration) {
         setAnimationDuration(el, opts.duration);
     }
-
     setAnimateCssClasses(el, className);
-
+    el.addEventListener(animationEventName, animEnd);
     function animEnd() {
 
+        el.removeEventListener(animationEventName, animEnd);
         //remove the animate.css classes
         setAnimateCssClasses(el, className, false);
-
-        //remove event listeners
-        animEndEventNames.forEach(function(evName) {
-            el.removeEventListener(evName, animEnd);
-        });
 
         if (opts.duration) {
             //reset animationDuration
@@ -65,11 +79,8 @@ var animate = function(el, opts) {
         opts.callbacks.forEach(function(cb) {
             cb();
         });
+        opts.callbacks = [];
     }
-
-    animEndEventNames.forEach(function(evName) {
-        el.addEventListener(evName, animEnd);
-    });
 };
 
 /**
@@ -81,12 +92,12 @@ var animate = function(el, opts) {
  * @param {function[]} [opts.callbacks]
  */
 var show = function(el, opts) {
-    el.classList.remove('hidden');
     opts = opts || {};
 
     opts.animationName = opts.animationName || 'slideInDown';
     opts.duration = opts.duration || 350;
 
+    el.classList.remove('hidden');
     animate(el, opts);
 };
 
