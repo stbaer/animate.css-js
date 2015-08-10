@@ -10,7 +10,7 @@
     "animateCss.bundle.js"
   ],
   "dependencies": {
-    "animate.css": "^3.2.5"
+    "animate.css": "^3.4.0"
   },
   "devDependencies": {
     "browserify": "latest",
