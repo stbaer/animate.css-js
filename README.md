@@ -1,32 +1,17 @@
 # animate.css-js
 
-[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
-
 > Javascript helper for animate.css
 
 ## How to use
 
-[![NPM](https://nodei.co/npm/animate.css-js.png?downloads=true)](https://nodei.co/npm/animate.css-js/)
-
-### browserify
-
 add the animate.css styles
 
-```js
-var animateCss = require('animate.css-js');
+```
+var animateCss = require('animate.css-js'); // Or add animateCss.bundle.js for the standalone version
 var element = document.querySelector('.some-element');
 
-// use animateCss.show(..), animateCss.hide(..) or animateCss.animate(..)
-```
-
-### standalone
-
-- add the animate.css styles
-- add animateCss.bundle.js
-
-
-```js
-// use animateCss.show(..), animateCss.hide(..) or animateCss.animate(..)
+// use animateCss.show(..), animateCss.hide(..) 
+// or animateCss.animate(..)
 ```
 
 ### API
@@ -49,13 +34,13 @@ var element = document.querySelector('.some-element');
 
 ### Example
 
-```js
+```
 animateCss.animate( element, {
     animationName: 'zoomIn',
     duration: 500,
     callbacks: [
         function(){
-            // zoomIn animation complete
+            // zoomIn animation complete, do sth
         }
     ]
 });
@@ -63,8 +48,9 @@ animateCss.animate( element, {
 
 ## build
 
-```sh
-npm run build
+```
+$ npm install
+$ npm run build
 ```
 
 ## License
