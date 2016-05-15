@@ -6,9 +6,10 @@
  * @param {Element} el
  * @param {number} [duration] in ms
  */
-var setAnimationDuration = function(el, duration) {
-    el.style['-webkit-animation-duration'] = duration ? duration + 'ms' : '';
-    el.style['animation-duration'] = duration ? duration + 'ms' : '';
+var setAnimationDuration = function (el, duration) {
+    var durationMs = duration ? duration + 'ms' : '';
+    el.style['-webkit-animation-duration'] = durationMs;
+    el.style['animation-duration'] = durationMs;
 };
 
 /**
@@ -19,18 +20,17 @@ var setAnimationDuration = function(el, duration) {
  * @param {String} animationName
  * @param {Boolean} [doAdd=true] - set to false to remove the classes
  */
-var setAnimateCssClasses = function(el, animationName, doAdd) {
+var setAnimateCssClasses = function (el, animationName, doAdd) {
 
-    var addOrRemove = doAdd !== false ? 'add' : 'remove';
+    ['animated', animationName].forEach(function (str) {
+        el.classList[doAdd !== false ? 'add' : 'remove'](str);
+    });
 
-    el.classList[addOrRemove]('animated');
-    el.classList[addOrRemove](animationName);
 };
 
 //https://jonsuh.com/blog/detect-the-end-of-css-animations-and-transitions-with-javascript/
-var whichAnimationEvent = function() {
-    var t,
-        el = document.createElement('fakeelement');
+var whichAnimationEvent = function () {
+    var el = document.createElement('fakeelement'), t;
 
     var animations = {
         'animation': 'animationend',
@@ -54,30 +54,30 @@ var whichAnimationEvent = function() {
  * @property {number} [opts.duration]
  * @param {function[]} [opts.callbacks=[]]
  */
-var animate = function(el, opts) {
+var animate = function (el, opts) {
 
     opts.callbacks = opts.callbacks || [];
 
-    var className = opts.animationName;
     var animationEventName = whichAnimationEvent();
 
     if (opts.duration) {
         setAnimationDuration(el, opts.duration);
     }
-    setAnimateCssClasses(el, className);
+    setAnimateCssClasses(el, opts.animationName);
     el.addEventListener(animationEventName, animEnd);
+
     function animEnd() {
 
         el.removeEventListener(animationEventName, animEnd);
         //remove the animate.css classes
-        setAnimateCssClasses(el, className, false);
+        setAnimateCssClasses(el, opts.animationName, false);
 
         if (opts.duration) {
             //reset animationDuration
             setAnimationDuration(el);
         }
         // call the callbacks
-        opts.callbacks.forEach(function(cb) {
+        opts.callbacks.forEach(function (cb) {
             cb();
         });
         opts.callbacks = [];
@@ -92,7 +92,7 @@ var animate = function(el, opts) {
  * @property {number} [opts.duration=300]
  * @param {function[]} [opts.callbacks]
  */
-var show = function(el, opts) {
+var show = function (el, opts) {
     opts = opts || {};
 
     opts.animationName = opts.animationName || 'slideInDown';
@@ -110,7 +110,7 @@ var show = function(el, opts) {
  * @property {number} [opts.duration=300]
  * @param {function[]} [opts.callbacks]
  */
-var hide = function(el, opts) {
+var hide = function (el, opts) {
 
     opts = opts || {};
 
@@ -121,14 +121,14 @@ var hide = function(el, opts) {
     //if the element is already hidden
     if (el.classList.contains('hidden')) {
         //call the callbacks directly
-        opts.callbacks.forEach(function(cb) {
+        opts.callbacks.forEach(function (cb) {
             cb();
         });
         //and get out
         return;
     }
 
-    opts.callbacks.push(function() {
+    opts.callbacks.push(function () {
         el.classList.add('hidden');
     });
     animate(el, opts);
